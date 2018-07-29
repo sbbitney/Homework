@@ -1,0 +1,75 @@
+
+Sub Stock_ticker()
+
+
+
+    For Each ws In Worksheets
+           
+            ws.Cells(1, 10).Value = "Ticker"
+
+            ws.Cells(1, 11).Value = "Total Volume"
+            
+            Dim Row_Counts As Integer
+            Dim Volume As Double
+            Dim Ticker As String
+            
+            Volume = 0
+            
+            Row_Counts = 2
+          
+            final_row = ws.Cells(Rows.Count, 1).End(xlUp).Row
+
+            For i = 2 To final_row
+                    
+            
+                   
+                    If ws.Cells(i + 1, 1).Value <> ws.Cells(i, 1).Value Then
+                
+                        Ticker = ws.Cells(i, 1).Value
+                
+                        Volume = Volume + ws.Cells(i, 7).Value
+                
+               
+                        ws.Cells(Row_Counts, 10).Value = Ticker
+                
+     
+                        ws.Cells(Row_Counts, 11).Value = Volume
+                
+                
+                        Row_Counts = Row_Counts + 1
+                        
+                      
+                        Volume = 0
+                
+                  
+                    Else
+                      
+                        Volume = Volume + ws.Cells(i, 7).Value
+                    End If
+            Next i
+    Next ws
+
+       ' If ws.Cells(i, 1).Value <> ws.Cells(i + 1, 1).Value Then
+       ' Volumes = Volumes + ws.Cells(i, 7).Value
+       '     ws.Cells(Counter, 8).Value = ws.Cells(i, 1).Value
+       '     ws.Cells(Counter, 9).Value = Volumes
+       '     Volumes = 0
+       '     Counter = Counter + 1
+       ' Else
+       '     Volumes = Volumes + ws.Cells(i, 7).Value
+        'End If
+    'Next i
+    
+        
+'Next ws
+'changes each page. Better would be
+'when Cells(i, 1) <> ""
+'Define variables as str or long
+'create for loop, when ticker is same in column Cells(i, 1)
+'add them, Volume = Volume + Cells(i,7).Value
+'display the output.
+'display ticker =
+'display volume
+'next ticker symbol
+
+End Sub
