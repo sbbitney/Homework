@@ -1,0 +1,198 @@
+#"How do I import the data?" 
+#"How do I convert the data into a DataFrame?" 
+#"How do I build the first table?" 
+#Don't get intimidated by the number of asks. 
+#Many of them are repetitive in nature with just a few tweaks. Be persistent and creative
+#------------
+import pandas as pd
+import numpy as np
+
+#UTAUS201807DATA2/homework-instructions/04-Numpy-Pandas/Instructions/HeroesOfPymoli/Resources/
+df = pd.read_csv("HeroesOfPymoli/Resources/purchase_data.csv")
+df
+#print(df.head())
+#open data and read it
+
+#GET SIZE OF DATA FRAME.  
+#df.shape
+#this gives us (780, 7), meaning 781 total. 
+
+
+total_players = 0
+players_list = []
+
+total_items = 0
+items_list = []
+
+total_price = 0
+purchases = 0
+
+total_males = 0
+total_females = 0
+total_other = 0
+
+num_of_male_purchases = 0
+num_of_female_purchases = 0
+num_of_other_purchases = 0
+
+total_male_revenue = 0
+total_female_revenue = 0
+total_other_revenue = 0
+
+#count the number of players.  iterate through to get every player
+#if it's not on the list, add it to the list, then count how many on the list. 
+
+for index, row in df.iterrows():
+    player = row[1]
+    gender = row[3]
+    cost = row[6]
+    
+    if player not in players_list:
+        players_list.append(player)
+        total_players += 1
+        if gender == "Male":
+            total_males += 1
+            #total_male_revenue += male_revenue
+        elif gender == "Female":
+            total_females += 1
+        else:
+            total_other += 1
+    
+    if gender == "Male":
+        num_of_male_purchases += 1
+        total_male_revenue += cost
+
+    elif gender == "Female":
+        num_of_female_purchases += 1
+        total_female_revenue += cost 
+        
+    else:
+        num_of_other_purchases += 1
+        total_other_revenue += cost
+
+print(f"The total number of players is: {total_players}")
+#print(players_list)-----------------------
+#df["Total Players"] = pd.DataFrame("total_players")
+
+#totaldf = pd.DataFrame(columns=list("Total Players"))
+#totaldf.loc[1] = [total_players]
+
+#totaldf
+
+#In [399]: df = pd.DataFrame(columns=list('ABC'))
+
+#In [400]: df.loc[0] = [1,1.23,'Hello']
+    
+#df["Test Score Summary"] = pd.cut(df["Test Score"], bins, labels=group_names)-----------------------
+#df
+ 
+for index, row in df.iterrows():
+    item = row[5]
+    
+    if item not in items_list:
+        items_list.append(item)
+        total_items += 1
+print(f"The total number of unique items is: {total_items}")
+
+#count number of unique items.  if item is not on list, add it to list and add 1 to count
+#find avg purchase price (total spent / total transactions)
+#find total num of purhcases - count each purcahsed item
+#find total revenue - sum up every purchase. 
+for index, row in df.iterrows():
+    price = row[6]
+#turn price from string into int
+    new_price = float(price)
+    total_price += new_price
+    purchases += 1
+    #need to round price
+    
+print(f"The total revenue is: ${total_price}")
+print(f"The total number of purchases is: {purchases}")
+average_price = total_price/purchases
+print(f"The average purchase price is: ${average_price}")
+
+#find % of male players and total number - count each male, then divide males by total 
+#find % of female players and total number - count each female, then divide females by total 
+#find % of 'other' players and total number - count each, then divide 'other' by total 
+#iterate through, see row[3], record gender.  then, divide by total number of unique users.  
+
+
+print(f"The percentage of male players is {(total_males/total_players)*100} and the total number of 'Male' players is {total_males}")
+#NEED TO ROUND AND FORMAT PERCENTAGE FOR GENDER#########--------------
+
+print(f"The percentage of female players is {(total_females/total_players)*100} and the total number of 'Female' players is {total_females}")
+#NEED TO ROUND AND FORMAT PERCENTAGE FOR GENDER#########--------------
+
+print(f"The percentage of 'other/non-disclosed' players is {(total_other/total_players)*100}total number of 'other/non-disclosed' players is {total_other}")
+#NEED TO ROUND AND FORMAT PERCENTAGE FOR GENDER#########--------------
+
+#print(players_list)
+
+#Purchase Count by gender
+    #iterate through list and note gender as well as purchase price  
+    #total_males += 1, num_of_male_purchases += 1, total_male_revenue += male_revenue
+#Average Purchase Price by gender
+
+#Total Purchase Value by gender
+#Average Purchase Total per Person by Gender
+    #divide total purchase revenue for males, by total males, then females, etc. 
+print(f"the total number of purchases by males is {num_of_male_purchases}")
+male_avg_price = total_male_revenue/num_of_male_purchases
+male_avg_total = total_male_revenue/total_males
+
+print(f"The total revenue from males is ${total_male_revenue}")
+
+print(f"the total number of purchases by females is {num_of_female_purchases}")
+print(f"The total revenue from females is ${total_female_revenue}")
+female_avg_price = total_female_revenue/num_of_female_purchases
+female_avg_total = total_female_revenue/total_females
+
+
+
+print(f"the total number of purchases by 'other/non-disclosed' is {num_of_other_purchases}")
+print(f"The total revenue from 'other/non-disclosed' is ${total_other_revenue}")
+other_avg_price = total_other_revenue/num_of_other_purchases
+other_avg_total = total_other_revenue/total_other
+
+
+#The below are each broken into bins of 4 years <10, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40+
+    #Percentage and Count of Players in each age bin
+
+    
+    
+age_bins = [0, 9.90, 14.90, 19.90, 24.90, 29.90, 34.90, 39.90, 99999]
+group_names = ["<10", "10-14", "15-19", "20-24", "25-29", "30-34", "35-39", "40+"]
+
+df["Age Groups"] = pd.cut(df["Age"], age_bins, labels=group_names)
+#this added dataframe. 
+
+
+
+#df["unique users"] = df['SN'].value_counts()
+#dataframe = df.drop_duplicates(subset = "SN").groupby("Age Groups")['Age'].count()
+
+age_demographics = df["Age Groups"].value_counts() 
+age_percent = (age_demographics/total_players)*100
+
+new_df = pd.DataFrame({"Total Count": age_demographics, "Percentage of Players": age_percent})
+#created dictionary to form new dataframe.  columns is key, variable is the value.  
+
+new_df = new_df.sort_index()
+
+new_df
+
+#print(df['Age'].max())
+    #max age is 45 yrs old
+
+#The below each broken into bins of 4 years (i.e. <10, 10-14, 15-19, etc.)
+    #Purchase Count
+    #Average Purchase Price
+    #Total Purchase Value
+    #Average Purchase Total per Person by Age Group
+
+    
+
+
+
+#dataframe = pd.dataframe({"one": })
+
