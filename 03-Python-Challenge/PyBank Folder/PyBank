@@ -1,0 +1,6 @@
+path = election_data.csv
+lines = [line for line in open(path)]
+
+lines[0]
+
+
