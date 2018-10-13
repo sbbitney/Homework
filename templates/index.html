@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>All About Mars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+
+    <!-- Craigslist Listings -->
+    <div class="row" id="Mars Information">
+      <div class="col-md-12">
+        <div class"panel panel-default">
+          <div class="panel-body">
+            <title>Page Title</title>
+            </head>
+            <h2>Latest Mars News:</h2>
+            <h3>{{mars.headline}}</h3>
+            <p>{{mars.article}}</p>
+            <h4>Mars Weather</h4>
+            <p>{{mars.Latest_Weather}}</p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+       
+        
+        </html>
+
+        <h4>Featured Mars Image</h4>
+        <img src="{{mars.Featured_JPL_Image}}" alt="JPL">
+
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>
+
