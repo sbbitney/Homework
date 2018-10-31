@@ -1,4 +1,14 @@
-var data = [{
+var data = [
+  {
+    datetime: "1/1/2010",
+    city: "Austin",
+    state: "TX",
+    country: "us",
+    shape: "light",
+    durationMinutes: "Test O'toole",
+    comments: "Three bright red lights witnessed floating stationary over San Diego New Years Day 2010"
+  },
+  {
     datetime: "1/1/2010",
     city: "benton",
     state: "ar",
